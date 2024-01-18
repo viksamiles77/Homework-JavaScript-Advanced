@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Site</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+    <div id="main-heading">
+        <h1>CARS FOR SALE</h1>
+    </div>
+    <div class="grid-container">
+        <div class="left-side">
+            <div class="car-filter-inputs-container">
+                <select name="cars" id="select-car-type" class="filter-inputs">
+                    <option value="" disabled selected>Select car type:</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Sedan">Sedan</option>
+                    <option value="Hatchback">Hatchback</option>
+                    <option value="Convertible">Convertible</option>
+                    <option value="Truck">Truck</option>
+                    <option value="Coupe">Coupe</option>
+                </select>
+                <select name="cars" id="select-car-brand" class="filter-inputs">
+                    <option value="" disabled selected>Select car brand:</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Ford">Ford</option>
+                    <option value="BMW">BMW</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Hyundai">Hyundai</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Ram">Ram</option>
+                    <option value="Audi">Audi</option>
+                    <option value="Kia">Kia</option>
+                    <option value="Subaru">Subaru</option>
+                    <option value="Fiat">Fiat</option>
+                </select>
+                <input type="text" name="model" id="car-model-input" placeholder="Car model" class="filter-inputs">
+                <input type="number" name="doors" id="number-of-car-doors" min="0" placeholder="Number of doors"
+                    class="filter-inputs">
+                <select name="gas-type" id="select-gas-type" class="filter-inputs">
+                    <option value="" disabled selected>Select gas type:</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Gasoline">Gasoline</option>
+                    <option value="Hybrid">Hybrid</option>
+                    <option value="Electric">Electric</option>
+                </select>
+                <select name="color" id="select-color" class="filter-inputs">
+                    <option value="" disabled selected>Choose color:</option>
+                    <option value="white">White</option>
+                    <option value="black">Black</option>
+                    <option value="silver">Silver</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="gray">Gray</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="orange">Orange</option>
+                    <option value="purple">Purple</option>
+                </select>
+                <button type="button" id="reset-filter-btn">Reset Filters</button>
+            </div>
+        </div>
+        <div class="right-side">
+            <table id="car-table">
+                <tr>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Doors</th>
+                    <th>Gas Type</th>
+                    <th>Color</th>
+                    <th>Condition</th>
+                    <th>Horsepower</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
