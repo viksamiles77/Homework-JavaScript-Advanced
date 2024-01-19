@@ -52,7 +52,16 @@
 //   });
 // }
 
-let carTable = document.querySelector("#car-table");
+const carTable = document.querySelector("#car-table");
+const selectCarType = document.querySelector("#select-car-type");
+const selectCarBrand = document.querySelector("#select-car-brand");
+const selectCarModel = document.querySelector("#car-model-input");
+const selectCarDoors = document.querySelector("#number-of-car-doors");
+const selectGasType = document.querySelector("#select-gas-type");
+const selectCarColor = document.querySelector("#select-color");
+const resetFilterBtn = document.querySelector("#reset-filter-btn");
+const applyFilterBtn = document.querySelector("#apply-filter-btn");
+
 const jsonURL =
   "https://raw.githubusercontent.com/viksamiles77/Viktor_JSON/main/cars.json";
 
@@ -64,15 +73,15 @@ fetch(jsonURL)
     allCarsArray.forEach((car) => {
       const row = document.createElement("tr");
 
-      // fillTheBrandCell(row, car.brand);
-      // fillTheModelCell(row, car.model);
-      // fillTheDoorsCell(row, car.doors);
-      // fillTheGasTypeCell(row, car.gasType);
-      // fillTheColorCell(row, car.color);
-      // fillTheConditionCell(row, car.isNew ? "New" : "Used");
-      // fillTheHorsepowerCell(row, car.horsepower);
+      fillTheBrandCell(row, car.brand);
+      fillTheModelCell(row, car.model);
+      fillTheDoorsCell(row, car.doors);
+      fillTheGasTypeCell(row, car.gasType);
+      fillTheColorCell(row, car.color);
+      fillTheConditionCell(row, car.isNew ? "New" : "Used");
+      fillTheHorsepowerCell(row, car.horsepower);
 
-      // carTable.appendChild(row);
+      carTable.appendChild(row);
     });
   })
   .catch((error) => {
