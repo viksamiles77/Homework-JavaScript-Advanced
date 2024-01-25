@@ -64,7 +64,7 @@ option {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   background-color: #ffffff;
-  border: 3px solid rgb(85, 0, 165);
+  border: 3px solid rgb(233, 105, 0);
   border-radius: 10px;
   display: block;
   margin-left: auto;
@@ -73,7 +73,7 @@ option {
 }
 
 #reset-filter-btn:hover {
-  background-color: rgb(85, 0, 165);
+  background-color: rgb(233, 105, 0);
   cursor: pointer;
   color: #ffffff;
 }
@@ -108,4 +108,77 @@ td {
   text-align: left;
   padding: 3px;
   width: calc(100% / 7);
+}
+
+#filters-heading {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  color: rgb(233, 105, 0);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.checkbox-css {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 175px;
+  font-size: 16px;
+}
+
+.horsepower-div {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 175px;
+  font-size: 15px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background: rgb(85, 0, 165); /* Set the desired color */
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: rgb(233, 105, 0);
+  border-radius: 20%;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background: rgb(233, 105, 0);
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #eee;
+  border: 2px solid #333;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background: rgb(233, 105, 0);
 }
