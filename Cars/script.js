@@ -87,7 +87,7 @@ html.applyFilterBtn.addEventListener("click", () => {
   const horsepowerRangeInputValue = html.horsepowerRangeInput.value;
 
   getCars().then((cars) => {
-    // filter cars
+    // filter cars and filters working together
     const filteredCars = cars.filter((car) => {
       return (
         (carTypeValue === "" ||
