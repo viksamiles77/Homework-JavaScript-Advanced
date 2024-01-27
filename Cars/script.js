@@ -14,6 +14,8 @@ const html = {
   applyFilterBtn: document.querySelector("#apply-filter-btn"),
 };
 
+let CarsFromJSON;
+
 const jsonURL =
   "https://raw.githubusercontent.com/viksamiles77/Viktor_JSON/main/cars.json";
 
@@ -22,6 +24,10 @@ const jsonURL =
 function getCars() {
   return fetch(jsonURL)
     .then((res) => res.json())
+    .then((cars) => {
+      CarsFromJSON = cars; // store the fetched cars in the variable
+      return cars; // return the cars for further processing if needed
+    })
     .catch((error) => {
       console.log("ERROR", error);
     });
@@ -86,49 +92,45 @@ html.applyFilterBtn.addEventListener("click", () => {
   const conditionUsedChecked = html.conditionUsed.checked;
   const horsepowerRangeInputValue = html.horsepowerRangeInput.value;
 
-  getCars().then((cars) => {
-    // filter cars and filters working together
-    const filteredCars = cars.filter((car) => {
-      return (
-        (carTypeValue === "" ||
-          car.type.toLowerCase() === carTypeValue.toLowerCase()) &&
-        (carBrandValue === "" ||
-          car.brand.toLowerCase() === carBrandValue.toLowerCase()) &&
-        (carModelValue === "" ||
-          car.model.toLowerCase().includes(carModelValue)) &&
-        (carDoorValue === "" || car.doors == carDoorValue) &&
-        (carGasTypeValue === "" ||
-          car.gasType.toLowerCase() === carGasTypeValue.toLowerCase()) &&
-        (carColorValue === "" ||
-          car.color.toLowerCase() === carColorValue.toLowerCase()) &&
-        ((conditionNewChecked && conditionUsedChecked) ||
-          (conditionNewChecked && car.isNew) ||
-          (conditionUsedChecked && !car.isNew)) &&
-        (horsepowerRangeInputValue === "" ||
-          parseInt(car.horsepower) <= parseInt(horsepowerRangeInputValue))
-      );
-    });
-
-    // reset filter button
-    html.resetFilterBtn.addEventListener("click", () => {
-      html.carTypeInput.value = "";
-      html.carBrandInput.value = "";
-      html.carModelInput.value = "";
-      html.carDoorInput.value = "";
-      html.carGasTypeInput.value = "";
-      html.carColorInput.value = "";
-      html.conditionNew.checked = false;
-      html.conditionUsed.checked = false;
-      html.horsepowerRangeInput.value = "";
-
-      getCars().then((cars) => {
-        showTable(cars);
-      });
-    });
-
-    // creating the table with filtered cars
-    showTable(filteredCars);
+  // filter cars and filters working together
+  const filteredCars = CarsFromJSON.filter((car) => {
+    return (
+      (carTypeValue === "" ||
+        car.type.toLowerCase() === carTypeValue.toLowerCase()) &&
+      (carBrandValue === "" ||
+        car.brand.toLowerCase() === carBrandValue.toLowerCase()) &&
+      (carModelValue === "" ||
+        car.model.toLowerCase().includes(carModelValue)) &&
+      (carDoorValue === "" || car.doors == carDoorValue) &&
+      (carGasTypeValue === "" ||
+        car.gasType.toLowerCase() === carGasTypeValue.toLowerCase()) &&
+      (carColorValue === "" ||
+        car.color.toLowerCase() === carColorValue.toLowerCase()) &&
+      ((!conditionNewChecked && !conditionUsedChecked) ||
+        (conditionNewChecked && car.isNew) ||
+        (conditionUsedChecked && !car.isNew)) &&
+      (horsepowerRangeInputValue === "" ||
+        parseInt(car.horsepower) <= parseInt(horsepowerRangeInputValue))
+    );
   });
+
+  // reset filter button
+  html.resetFilterBtn.addEventListener("click", () => {
+    html.carTypeInput.value = "";
+    html.carBrandInput.value = "";
+    html.carModelInput.value = "";
+    html.carDoorInput.value = "";
+    html.carGasTypeInput.value = "";
+    html.carColorInput.value = "";
+    html.conditionNew.checked = false;
+    html.conditionUsed.checked = false;
+    html.horsepowerRangeInput.value = "";
+
+    showTable(CarsFromJSON);
+  });
+
+  // creating the table with filtered cars
+  showTable(filteredCars);
 });
 
 // init
