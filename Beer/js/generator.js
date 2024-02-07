@@ -14,18 +14,39 @@ async function fetchBeer() {
   return data;
 }
 
-async function displayRandomBeer() {
+async function showRandomBeer() {
   const beerData = await fetchBeer();
-  const imgUrl = beerData[0].image_url;
-  const imgElement = document.createElement("img");
-  const beerName = beerData[0].name;
-  const beerDescription = beerData[0].description;
-  imgElement.src = imgUrl;
-  imgElement.alt = "We don't have a photo of this beer :(";
-  imgWrap.innerHTML = ""; // clear previous
-  imgWrap.appendChild(imgElement);
-  beerNameText.innerText = beerName;
-  beerDescriptionText.innerText = beerDescription;
+  if (beerData[0].image_url === null) {
+    const imgUrl = "./img/opt-rxgjj.webp";
+    const imgElement = document.createElement("img");
+    const beerName = beerData[0].name;
+    const beerDescription = beerData[0].description;
+    imgElement.src = imgUrl;
+    imgElement.alt = "We don't have a photo of this beer :(";
+    imgWrap.innerHTML = ""; // clear previous
+    imgWrap.appendChild(imgElement);
+    beerNameText.innerText = beerName;
+    beerDescriptionText.innerText = beerDescription;
+  } else {
+    const imgUrl = beerData[0].image_url;
+    const imgElement = document.createElement("img");
+    const beerName = beerData[0].name;
+    const beerDescription = beerData[0].description;
+    imgElement.src = imgUrl;
+    imgElement.alt = "We don't have a photo of this beer :(";
+    imgWrap.innerHTML = ""; // clear previous
+    imgWrap.appendChild(imgElement);
+    beerNameText.innerText = beerName;
+    beerDescriptionText.innerText = beerDescription;
+  }
+}
+
+function displayRandomBeer() {
+  try {
+    showRandomBeer();
+  } catch (error) {
+    console.log(error);
+  }
 
   //   debugger;
 }

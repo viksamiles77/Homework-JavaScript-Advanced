@@ -9,7 +9,29 @@
 </head>
 
 <body>
-    <p>asd</p>
+    <div id="main-heading">
+        <h1>BEER MENU</h1>
+    </div>
+    <div class="nav-bar">
+        <div class="nav-bar-item">
+            <input type="search" name="beer" id="beer-search" placeholder="Search for a beer">
+        </div>
+        <div class="nav-bar-item">
+            <select name="pagination" id="select-pagination">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="80">80</option>
+            </select>
+        </div>
+        <div class="nav-bar-item">filter</div>
+        <div class="nav-bar-item">
+            <button id="back-to-generator-btn">Back To Generator</button>
+        </div>
+    </div>
+    <div class="result">
+    </div>
+
+
     <script src="./js/menu.js"></script>
 </body>
 
