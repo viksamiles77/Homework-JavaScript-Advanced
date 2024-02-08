@@ -56,3 +56,54 @@ body {
   cursor: pointer;
   background-color: rgb(46, 114, 0);
 }
+
+#result {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.beer-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgb(33, 82, 0);
+}
+
+th,
+td {
+  padding: 3px;
+  border-bottom: 2px solid rgb(33, 82, 0);
+}
+
+th {
+  text-align: left;
+  font-size: 16px;
+}
+
+td {
+  font-size: 14px;
+}
+
+#btn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 200px;
+  margin-top: 10px;
+}
+
+#previous-button,
+#next-button {
+  padding: 2px 5px 2px 5px;
+  background-color: rgb(33, 82, 0);
+  color: #fff;
+  font-size: 15px;
+  border-radius: 5px;
+  width: 75px;
+}
+
+#previous-button:hover,
+#next-button:hover {
+  cursor: pointer;
+  background-color: rgb(46, 114, 0);
+}
