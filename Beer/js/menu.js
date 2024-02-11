@@ -3,17 +3,18 @@ const searchBeer = document.querySelector("#beer-search");
 const selectPagination = document.querySelector("#select-pagination");
 const resultContainer = document.querySelector("#result");
 const checkbox = document.querySelector("#checkbox");
+const checkboxEbc = document.querySelector("#checkbox-ebc");
 const backToGenBtn = document.querySelector("#back-to-generator-btn");
 const nextPageBtn = document.querySelector("#next-button");
 const previousPageBtn = document.querySelector("#previous-button");
 let currentPage = 1;
-let perPage = 25;
+let perPage = parseInt(selectPagination.value);
 
 // functions
 async function getBeers() {
   try {
     const searchValue = searchBeer.value.trim();
-    const paginationValue = selectPagination.value;
+    // const paginationValue = selectPagination.value;
     let apiUrl = `https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=${perPage}`;
 
     if (searchValue) {
@@ -22,12 +23,20 @@ async function getBeers() {
 
     if (checkbox.checked) {
       apiUrl += `&abv_gt=6`;
-      console.log("its checked");
+    }
+
+    if (checkboxEbc.checked) {
+      apiUrl += `&ebc_gt=50`;
     }
 
     const response = await fetch(apiUrl);
     const beers = await response.json();
-    return beers;
+
+    if (beers.length === 0) {
+      resultContainer.innerHTML = `<p class="no-beers-found">No beers found.</p>`;
+    } else {
+      return beers;
+    }
   } catch (error) {
     console.log(error);
   }
@@ -39,10 +48,11 @@ function createTable(beers) {
           <tr>
             <th>ID</th>
             <th>Name</th>
-            <th>Food Pairing</th>
-            <th>ABV</th>
-            <th>EBC</th>
-            <th>IBU</th>
+            <th>First Brewed</th>
+            <th><div class="tooltip"><span class="tooltip-text">Potential of Hydrogen</span>PH</div></th>
+            <th><div class="tooltip"><span class="tooltip-text">Alcohol by Volume</span>ABV</div></th>
+            <th><div class="tooltip"><span class="tooltip-text">Measuring the color of a beer</span>EBC</div></th>
+            <th><div class="tooltip"><span class="tooltip-text">International Bitterness Units</span>IBU</div></th>
           </tr>
       `;
 
@@ -50,11 +60,14 @@ function createTable(beers) {
     table += `
           <tr>
             <td>${beer.id}</td>
-            <td>${beer.name}</td>
-            <td>${beer.food_pairing}</td>
-            <td>${beer.abv}</td>
-            <td>${beer.ebc}</td>
-            <td>${beer.ibu}</td>
+            <td><div class="tooltip"><span class="tooltip-text">${
+              beer.food_pairing
+            }</span>${beer.name}</td>
+            <td>${beer.first_brewed}</td>
+            <td>${beer.ph !== null ? beer.ph : 0}</td>
+            <td>${beer.abv !== null ? beer.abv : 0}</td>
+            <td>${beer.ebc !== null ? beer.ebc : 0}</td>
+            <td>${beer.ibu !== null ? beer.ibu : 0}</td>
           </tr>
         `;
   });
@@ -63,10 +76,30 @@ function createTable(beers) {
   return table;
 }
 
+function updatePaginationButtons() {
+  const totalBeers = 325;
+  const maxPages = Math.ceil(totalBeers / perPage);
+
+  if (currentPage >= maxPages) {
+    nextPageBtn.style.display = "none";
+  } else {
+    nextPageBtn.style.display = "block";
+  }
+
+  if (currentPage <= 1) {
+    previousPageBtn.style.opacity = "0";
+    previousPageBtn.style.pointerEvents = "none";
+  } else {
+    previousPageBtn.style.opacity = "1";
+    previousPageBtn.style.pointerEvents = "auto";
+  }
+}
+
 async function showBeers() {
   const beers = await getBeers();
   const table = createTable(beers);
   resultContainer.innerHTML = table;
+  updatePaginationButtons();
 }
 
 // event listeners
@@ -82,10 +115,26 @@ backToGenBtn.addEventListener("click", () => {
 nextPageBtn.addEventListener("click", () => {
   currentPage++;
   showBeers();
+  updatePaginationButtons();
 });
 
 previousPageBtn.addEventListener("click", () => {
   currentPage--;
+  showBeers();
+  updatePaginationButtons();
+});
+
+checkbox.addEventListener("change", () => {
+  showBeers();
+});
+
+checkboxEbc.addEventListener("change", () => {
+  showBeers();
+});
+
+selectPagination.addEventListener("change", () => {
+  perPage = parseInt(selectPagination.value);
+  currentPage = 1;
   showBeers();
 });
 
