@@ -2,8 +2,9 @@
 const searchBeer = document.querySelector("#beer-search");
 const selectPagination = document.querySelector("#select-pagination");
 const resultContainer = document.querySelector("#result");
-const checkbox = document.querySelector("#checkbox");
+const checkboxAbv = document.querySelector("#checkbox-abv");
 const checkboxEbc = document.querySelector("#checkbox-ebc");
+const checkboxIbu = document.querySelector("#checkbox-ibu");
 const backToGenBtn = document.querySelector("#back-to-generator-btn");
 const nextPageBtn = document.querySelector("#next-button");
 const previousPageBtn = document.querySelector("#previous-button");
@@ -21,12 +22,16 @@ async function getBeers() {
       apiUrl += `&beer_name=${searchValue}`;
     }
 
-    if (checkbox.checked) {
+    if (checkboxAbv.checked) {
       apiUrl += `&abv_gt=6`;
     }
 
     if (checkboxEbc.checked) {
       apiUrl += `&ebc_gt=50`;
+    }
+
+    if (checkboxIbu.checked) {
+      apiUrl += `&ibu_gt=40`;
     }
 
     const response = await fetch(apiUrl);
@@ -124,11 +129,15 @@ previousPageBtn.addEventListener("click", () => {
   updatePaginationButtons();
 });
 
-checkbox.addEventListener("change", () => {
+checkboxAbv.addEventListener("change", () => {
   showBeers();
 });
 
 checkboxEbc.addEventListener("change", () => {
+  showBeers();
+});
+
+checkboxIbu.addEventListener("change", () => {
   showBeers();
 });
 
