@@ -17,7 +17,7 @@ const html = {
 let CarsFromJSON;
 
 const jsonURL =
-  "https://raw.githubusercontent.com/viksamiles77/Viktor_JSON/main/cars.json";
+  "https://raw.githubusercontent.com/viksamiles77/Cars_JSON/main/cars.json";
 
 // <=== Functions ===>
 // init function
